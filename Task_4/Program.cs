@@ -27,17 +27,16 @@ namespace Task_4
             }
         }
 
-
         static void Main(string[] args)
         {
 
             OrderedDictionary elemenBase = new OrderedDictionary(new Comparison())
             {
-                { "Магнус Карлсен", 2847 },
-                { "Фабиано Каруана", 2820 },
-                { "Левон Аронян", 2797 },
-                { "Вишванатан Ананд", 2753 },
-                { "Шхрияр Мамедьяров", 2750 }
+                { "Магнус Карлсен", 1222},
+                { "Фабиано Каруана", "2847" },
+                { "Левон Аронян", 1222 },
+                { "Вишванатан Ананд", "2847" },
+                { "Шхрияр Мамедьяров", 2847 }
              };
 
             foreach (DictionaryEntry entry in elemenBase)
@@ -45,8 +44,13 @@ namespace Task_4
                 Console.WriteLine($"{entry.Key} - {entry.Value}");
             }
             Console.WriteLine();
-            Console.WriteLine();
 
+            Console.WriteLine(elemenBase[0].MyEqualsExten(1222));
+            Console.WriteLine(elemenBase[0].MyEqualsExten(elemenBase[2]));
+            Console.WriteLine(elemenBase[0].MyEqualsExten("2847"));
+            Console.WriteLine(elemenBase[1].MyEqualsExten("2847"));
+            Console.WriteLine(elemenBase[2].MyEqualsExten(elemenBase[4]));
+            Console.WriteLine(elemenBase[3].MyEqualsExten(elemenBase[4]));
 
             Console.ReadKey();
 
@@ -55,9 +59,21 @@ namespace Task_4
 
     public static class Extenthis
     {
-        public static bool KeyEquals<T, R>(this OrderedDictionary left, OrderedDictionary right)
+        public static bool MyEqualsExten<T>(this T left, T right)
         {
-           return left.Values == right.Values;
+            //тут просто якась логика
+            if (left is int)
+                return left.Equals(right);
+            else
+                return left.GetHashCode() == right.GetHashCode();
+
+
+
+            //або просто так
+            //return left.GetHashCode() == right.GetHashCode();
+
+            //або так
+            //return left.Equals(right);
         }
     }
 
