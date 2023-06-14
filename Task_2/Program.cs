@@ -13,7 +13,7 @@ namespace Task_2
     {
         static void Main()
         {
-            //це так трохи погратися 
+            //це так трохи погратися и для практи в LINQ
             SortedList<int, string> hashtable = new SortedList<int, string>()
                 {
                     {117, "Побутова хімія" },
@@ -29,40 +29,24 @@ namespace Task_2
 
                     {
                         "Ivan",
-                        new List<int>{
-                                        117,
-                                        717,
-
-                                     }
+                        new List<int>{ 117, 717}
                     },
 
 
                     {
                         "Gala",
-                        new List<int>{
-                                        311,
-                                        717,
-
-                                     }
+                        new List<int>{ 311, 717, 117, 123 }
                     },
 
 
                     {
                         "Sara",
-                        new List<int>{
-                                        717,
-                                        867,
-
-                                     }
+                        new List<int>{717}
                     },
 
                     {
                         "Ron",
-                        new List<int>{
-                                        123,
-                                        311,
-
-                                     }
+                        new List<int>{123, 311, 867 }
                     },
 
                 };
@@ -84,23 +68,30 @@ namespace Task_2
                 }
 
             }
-            Console.WriteLine();
+
+            Console.WriteLine(new String('-', 50));
+
+            string nameUser = "Ivan";
+
 
             var res2 =
-                from x in infopolis["Ivan"]
+                from x in infopolis[nameUser]
                 join y in hashtable
                 on x equals y.Key
                 select y.Value;
 
+
+            Console.WriteLine(nameUser + " купив товари з категорій:");
             foreach (var item1 in res2)
             {
-                Console.WriteLine("   " + item1);
+                Console.WriteLine(" -" + item1);
             }
 
+            Console.WriteLine(new String('-',50));
 
 
-            Console.WriteLine();
-            Console.WriteLine();
+            string categori = "Попутова техніка";
+            Console.WriteLine($"Товари з категорії \"{categori}\" купили");
 
             foreach (var item in infopolis)
             {
@@ -112,25 +103,13 @@ namespace Task_2
 
                 foreach (var item1 in res3)
                 {
-                    if (item1 == "Попутова техніка")
+                    if (item1 == categori)
                     {
-                        Console.WriteLine(item.Key);
+                        Console.WriteLine(" -" + item.Key);
                     }
                 }
 
             }
-
-
-
-            //Створіть колекцію, до якої можна додавати покупців.
-            //та категорію придбаної ними продукції.
-            //З колекції можна отримувати категорії товарів,
-            //які купив покупець або за категорією визначити покупців.
-
-
-
-
-
 
             Console.ReadKey();
         }
